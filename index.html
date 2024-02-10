@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oda 1 - stream it up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2471a3;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin: 120px 0;
+            text-align: center;
+        }
+        p {
+            color: #fdfefe;
+            text-align: center;
+            margin: 2px 0;
+        }
+        a {
+            color: #007bff;
+            text-align: center;
+            display: block;
+            margin-top: 2px;
+			margin-bottom: 2px;
+        }
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .mini-button {
+            display: inline-block;
+            padding: 10px 21px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-right: -5px;
+			transition: background-color 0.4s;
+			
+        }
+		.rectangle-button {
+            display: inline-block;
+            padding: 10px 37px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-right: -5px;
+			transition: background-color 0.4s;
+        }
+		.darker {
+            background-color: #5b2c6f;
+        }
+        .brighter {
+            background-color: #6c3483;
+        }
+        .darker_2 {
+            background-color: #76448a;
+        }
+		.brighter_2 {
+            background-color: #884ea0;
+        }
+        .panel {
+            display: none;
+            position: absolute;
+            background-color: #9b59b6;
+            padding: 10px;
+            border: 1px solid #8e44ad;
+            border-radius: 5px;
+            width: 97px;
+        }
+        .panel.show {
+            display: block;
+        }
+        .panel-buttons {
+            display: flex;
+            flex-direction: column;
+            margin-top: 0px;
+        }
+        .panel-button {
+            margin-bottom: 0px;
+			width: 100%
+        }
+		.rectangle-button:hover {
+             background-color:  #4a235a;
+        }
+		
+    </style>
+    <script>
+        function togglePanel(panelId, buttonId) {
+            var panel = document.getElementById(panelId);
+            var button = document.getElementById(buttonId);
+            var buttonRect = button.getBoundingClientRect();
+            var panelWidth = panel.offsetWidth;
+            
+            var offsetX = buttonRect.left;
+            if (offsetX + panelWidth > window.innerWidth) {
+                offsetX = window.innerWidth - panelWidth;
+            }
+            
+            panel.style.top = (buttonRect.bottom + 10) + 'px';
+            panel.style.left = offsetX + 'px';
+            
+            var isOpen = panel.classList.contains("show");
+            closeAllPanels();
+            if (!isOpen) {
+                panel.classList.add("show");
+            }
+        }
+
+        function closeAllPanels() {
+            var panels = document.querySelectorAll(".panel");
+            panels.forEach(function(panel) {
+                panel.classList.remove("show");
+            });
+        }
+
+        document.addEventListener("click", function(event) {
+            if (!event.target.classList.contains("rectangle-button")) {
+                closeAllPanels();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button class="rectangle-button darker" id="button1" onclick="togglePanel('panel1', 'button1')">   Socials   </button>
+        <button class="rectangle-button brighter" id="button2" onclick="togglePanel('panel2', 'button2')">   Products   </button>
+        <button class="rectangle-button darker" id="button3" onclick="togglePanel('panel3', 'button3')">   Contact   </button>
+    </div>
+    <div class="panel" id="panel1">
+        <div class="panel-buttons">
+            <button class="mini-button panel-button brighter" onclick="window.location.href='https://www.youtube.com'">Youtube</button>
+            <button class="mini-button panel-button brighter_2" onclick="window.location.href='https://www.twitter.com'">Twitter</button>
+            <button class="mini-button panel-button brighter" onclick="window.location.href='https://www.instagram.com'">Instagram</button>
+        </div>
+    </div>
+    <div class="panel" id="panel2">
+        <div class="panel-buttons">
+            <button class="mini-button panel-button brighter">Button 4</button>
+            <button class="mini-button panel-button brighter_2">Button 5</button>
+            <button class="mini-button panel-button brighter">Button 6</button>
+        </div>
+    </div>
+    <div class="panel" id="panel3">
+        <div class="panel-buttons">
+            <button class="mini-button panel-button brighter">Button 7</button>
+            <button class="mini-button panel-button brighter_2">Button 8</button>
+            <button class="mini-button panel-button brighter">Button 9</button>
+        </div>
+    </div>
+    <h1>Oda 1</h1>
+    <p> </p>
+    <p>Bu oda 1'in web sitesi</p>
+    <p>renk paletleriyle aram iyi değil</p> 
+</body>
+</html>
